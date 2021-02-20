@@ -74,10 +74,10 @@ int main()
 		ShaderProgramWrapper shader_program;
 
 		{
-			ShaderWrapper vertex_transform_shader(GL_VERTEX_SHADER, "StandardShading.vert");
+			ShaderWrapper vertex_transform_shader(GL_VERTEX_SHADER, "res/Shaders/StandardShading.vert");
 			vertex_transform_shader.compile();
 
-			ShaderWrapper vertex_color_shader(GL_FRAGMENT_SHADER, "StandardShading.frag");
+			ShaderWrapper vertex_color_shader(GL_FRAGMENT_SHADER, "res/Shaders/StandardShading.frag");
 			vertex_color_shader.compile();
 
 			shader_program.consumeShader(std::move(vertex_transform_shader));
@@ -86,7 +86,7 @@ int main()
 
 		shader_program.link();
 
-        auto scene = Scene::import("flamefall.obj");
+        auto scene = Scene::import("res/Cliff.obj");
 
         BufferWrapper vertex_buffer(GL_ARRAY_BUFFER), normal_buffer(GL_ARRAY_BUFFER), element_buffer(GL_ELEMENT_ARRAY_BUFFER);
         vertex_buffer.setData(scene.getVertices());

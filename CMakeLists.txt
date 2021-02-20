@@ -8,6 +8,7 @@ find_package(glm CONFIG REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 find_package(glew CONFIG REQUIRED)
 find_package(assimp CONFIG REQUIRED)
+find_package(Boost REQUIRED COMPONENTS iostreams)
 
 # Shared
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
@@ -15,24 +16,26 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin/$<CONFIG>")
 
 # Application
 add_executable(FlameFall
-	src/main.cpp
-	src/context_wrappers.h
-	src/context_wrappers.cpp
-    src/shader.h
-	src/shader.cpp
-	src/uniform.h
-	src/uniform.cpp
-	src/scene.h
-	src/scene.cpp
-	src/buffer.h
 	src/buffer.cpp
+	src/buffer.h
+	src/context_wrappers.cpp
+	src/context_wrappers.h
+	src/main.cpp
+	src/resources.cpp
+	src/resources.h
+	src/scene.cpp
+	src/scene.h
+	src/shader.cpp
+	src/uniform.cpp
+	src/uniform.h
+    src/shader.h
 )	
 set_property(TARGET FlameFall PROPERTY FOLDER "FlameFall")
 set_property(TARGET FlameFall PROPERTY CXX_STANDARD 17)
 set_property(TARGET FlameFall PROPERTY CXX_STANDARD_REQUIRED ON)
 
-target_include_directories(FlameFall PRIVATE GLEW::glew glm glfw assimp::assimp)
-target_link_libraries(FlameFall PRIVATE GLEW::glew glm glfw assimp::assimp)
+target_include_directories(FlameFall PRIVATE GLEW::glew glm glfw assimp::assimp Boost::boost Boost::iostreams)
+target_link_libraries(FlameFall PRIVATE GLEW::glew glm glfw assimp::assimp Boost::boost Boost::iostreams)
 
 # Resources
 file(GLOB_RECURSE FLAMEFALL_RES_LIST base/*)
